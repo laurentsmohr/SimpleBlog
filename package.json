@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/index.js",
     "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon server/index.js"
+    "server-dev": "nodemon server/index.js",
+    "compile-sass": "node-sass client/sass/main.scss client/dist/style.css -w"
   },
   "repository": {
     "type": "git",
@@ -15,12 +16,9 @@
   },
   "author": "Laurents Mohr",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/laurentsmohr/SimpleBlog/issues"
-  },
-  "homepage": "https://github.com/laurentsmohr/SimpleBlog#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "connect-history-api-fallback": "^1.5.0",
     "express": "^4.16.3",
     "mysql": "^2.16.0",
     "react": "^16.4.2",
@@ -33,6 +31,13 @@
     "babel-loader": "^7.1.5",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "node-sass": "^4.9.3",
     "webpack": "^4.16.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
