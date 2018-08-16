@@ -1,0 +1,36 @@
+@mixin std-button() {
+  float: right;
+  border-radius: 3px;
+  border: 1px solid #000;
+  background-color: #000;
+  font-size: 1.6rem;
+  color: #fff;
+  font-weight: 100;
+  transition: all .2s;
+  padding: .5rem 1rem;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(68, 68, 68);
+    border: 1px solid rgb(68, 68, 68);
+    transform: translateY(-3px);
+    box-shadow: 0 .5rem .5rem rgba(#000, .2);
+  }
+
+  &:active,
+  &:focus {
+    cursor: pointer;
+    background-color: rgb(68, 68, 68);
+    border: 1px solid rgb(68, 68, 68);
+    transform: translateY(-1px);
+    box-shadow: 0 .25rem .25rem rgba(#000, .2);
+    outline: none;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

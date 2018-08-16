@@ -63,9 +63,9 @@ app.post('/articles', function (req, res){
 // EDITING AN ARTICLE
 app.put('/articles/:id', function (req, res){
   let article = req.body;
-  let queryStr = `UPDATE articles SET title=(?), description=(?), text=(?) WHERE id=(?)`;
+  let queryStr = `UPDATE articles SET title=(?), author=(?), description=(?), text=(?) WHERE id=(?)`;
   pool.getConnection(function(error, connection) {
-    connection.query(queryStr, [article.title, article.description, article.text, req.params.id], function(err, result) {
+    connection.query(queryStr, [article.title, article.author, article.description, article.text, req.params.id], function(err, result) {
       connection.release();
       if(err) res.status(500).send(err);
       else res.status(200).send(result);
