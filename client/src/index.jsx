@@ -6,7 +6,7 @@ import Article from './components/Article.jsx';
 import Comments from './components/Comments.jsx';
 import CreateArticle from './components/CreateArticle.jsx';
 import EditArticle from './components/EditArticle.jsx';
-
+import { BrowserRouter, Route, Link, Switch, browserHistory } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -40,7 +40,6 @@ class App extends React.Component {
     .then(res => {
       this.setState({
         current: res.data,
-        edit: true
       })
     })
     .catch(err => {
@@ -67,7 +66,7 @@ class App extends React.Component {
     .then(res => {
       article.article_id = res.data.insertId;
       this.setState(prevState => {
-        return {articles: [article, ...prevState.articles]}
+        return {articles: [article, ...prevState.articles]};
       })
     })
     .catch(err => {
@@ -94,29 +93,33 @@ class App extends React.Component {
   };
 
   render() {
-    if(this.state.current === null) {
-      return (
-        <div className="container">
-          <div className="button__box">
-            <button className="std-btn" onClick={this.openPopup}>New Post</button>
+    return (
+      <Switch>
+        <Route exact={true} path="/" render={() => (
+          <div className="container">
+            <div className="button__box">
+              <button className="std-btn" onClick={this.openPopup}>New Post</button>
+            </div>
+            {this.state.articles.map(article => {
+              return <ArticleMeta key={article.id} article={article} readArticle={this.readArticle} />
+            })}
+            <CreateArticle createArticle={this.createArticle} />
           </div>
-          {this.state.articles.map(article => {
-            return <ArticleMeta key={article.id} article={article} readArticle={this.readArticle} />
-          })}
-          <CreateArticle createArticle={this.createArticle} />
-        </div>
-      )
-    } else {
-      console.log('current: ', this.state.current);
-      return (
-        <div className="container">
-          <Article article={this.state.current.article[0]} openPopup={this.openPopup}/>
-          <Comments comments={this.state.current.comments} createComment={this.createComment}/>
-          <EditArticle editArticle={this.editArticle} article={this.state.current.article[0]}/>
-        </div>
-      )
-    }
+        )}/>
+        <Route exact path="/:id" render={({match}) => (
+          <div className="container">
+            <Article article={this.state.current.article[0]} openPopup={this.openPopup}/>
+            <Comments comments={this.state.current.comments} createComment={this.createComment}/>
+            <EditArticle editArticle={this.editArticle} article={this.state.current.article[0]}/>
+          </div>
+        )}/>
+      </Switch>
+    )
   }
 };
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render((
+  <BrowserRouter history={browserHistory}>
+    <App />
+  </BrowserRouter>
+), document.getElementById('app'));

@@ -4,9 +4,10 @@ const history = require('connect-history-api-fallback');
 const pool = require('./db/index');
 
 const app = express();
-//app.use(history());
-app.use(bodyParser.json());
+
+app.use(history());
 app.use(express.static(__dirname + '/../client/dist'));
+app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 8000;
 

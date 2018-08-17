@@ -4,11 +4,26 @@ import axios from 'axios';
 class Article extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      article: {}
+    }
     this.deletePost = this.deletePost.bind(this);
   }
 
+  componentDidMount() {
+    axios.get(`/articles/${match.params.id}`)
+    .then(res => {
+      this.setState({
+        current: res.data,
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
   deletePost() {
-    axios.delete(`/articles/${this.props.article.id}`)
+    axios.delete(`/articles/${match.params.id}`)
     .then(res => {
       console.log(res.data);
     })
@@ -26,14 +41,14 @@ class Article extends React.Component {
         </div>
         <div className="article">
           <div className="article__title">
-            {this.props.article.title}
+            {this.state.article.title}
           </div>
           <p className="article__info">
-            <span className="article__info_author">By {this.props.article.author}</span>
-            <span className="article__info_date">{this.props.article.date}</span>
+            <span className="article__info_author">By {this.state.article.author}</span>
+            <span className="article__info_date">{this.state.article.date}</span>
           </p>
           <div className="article__text">
-            {this.props.article.text}
+            {this.state.article.text}
           </div>
         </div>
       </div>
