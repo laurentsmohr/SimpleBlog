@@ -1,25 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import store from './store/configureStore';
+import { fetchArticle } from '../actions/index';
 
 class Article extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      article: {}
-    }
-    this.deletePost = this.deletePost.bind(this);
-  }
 
   componentDidMount() {
-    axios.get(`/articles/${match.params.id}`)
-    .then(res => {
-      this.setState({
-        current: res.data,
-      })
-    })
-    .catch(err => {
-      console.log(err);
-    })
+    store.dispatch(fetchArticle(match.params.id))
   }
 
   deletePost() {

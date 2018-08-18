@@ -15,7 +15,7 @@ class CreateArticle extends React.Component {
     this.handleInput = this.handleInput.bind(this);
   }
 
-  handleSubmit(e) {
+  handleSubmit() {
     let author = this.state.author || 'Anonymous';
     let description = this.state.description;
     if(this.state.description.substring(this.state.description.length - 3) !== '...') {

@@ -8,6 +8,7 @@ class CreateComment extends React.Component {
       text: ""
     }
     this.handleInput = this.handleInput.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInput(e) {
@@ -18,12 +19,21 @@ class CreateComment extends React.Component {
     }
   }
 
+  handleSubmit() {
+    let comment = {
+      author: this.state.author,
+      comment: this.state.text,
+      article_id: this.props.id
+    };
+    this.props.create(this.props.id, comment);
+  }
+
   render() {
     return (
       <div className="createComment__box">
         <form onSubmit={(e) => {
             e.preventDefault();
-            this.props.create(this.state);
+            this.handleSubmit();
             this.setState({author: "", text: ""});
           }} 
           className="createComment__form">
