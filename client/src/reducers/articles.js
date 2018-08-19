@@ -12,20 +12,31 @@
 
 // export default rootReducer;
 
-export const current = (state = null, action) => {
+export const currentArticle = (state = null, action) => {
   switch (action.type) {
       case 'FETCH_ARTICLE_SUCCESS':
+        return action.data.article;
+
+      case 'EDIT_ARTICLE':
         return action.article;
-      
-      case 'CREATE_COMMENT':
-        let newState = Object.assign({}, state);
-        newState.comments.push(action.comment);
-        return newState;
 
       default: 
         return state;
     }
 };
+
+export const currentComments = (state = [], action) => {
+  switch (action.type) {
+    case 'FETCH_ARTICLE_SUCCESS':
+      return action.data.comments;
+  
+    case 'CREATE_COMMENT':
+      return [...state, action.comment];
+
+    default: 
+      return state;
+  }
+}
 
 export const articles = (state = [], action) => {
   switch (action.type) {
@@ -36,14 +47,13 @@ export const articles = (state = [], action) => {
         return [action.article, ...state];
 
       case 'EDIT_ARTICLE':
-        let newState = state.map(article => {
+        return state.map(article => {
           if(article.id === action.article.id) {
-            return action.article;
+            return Object.assign({}, action.article);
           } else {
             return article;
           }
         })
-        return newState;
 
       case 'DELETE_ARTICLE':
         let index; 
@@ -53,7 +63,7 @@ export const articles = (state = [], action) => {
           }
         }
         state.splice(i, 1);
-        return state;
+        return [...state];
 
       default:
         return state;

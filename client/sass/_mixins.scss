@@ -13,7 +13,7 @@
     cursor: pointer;
     background-color: rgb(68, 68, 68);
     border: 1px solid rgb(68, 68, 68);
-    transform: translateY(-3px);
+    transform: scale(1.08);
     box-shadow: 0 .5rem .5rem rgba(#000, .2);
   }
 
@@ -22,7 +22,7 @@
     cursor: pointer;
     background-color: rgb(68, 68, 68);
     border: 1px solid rgb(68, 68, 68);
-    transform: translateY(-1px);
+    transform: scale(1.03);
     box-shadow: 0 .25rem .25rem rgba(#000, .2);
     outline: none;
   }

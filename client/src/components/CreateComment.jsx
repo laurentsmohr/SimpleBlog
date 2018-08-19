@@ -25,7 +25,9 @@ class CreateComment extends React.Component {
       comment: this.state.text,
       article_id: this.props.id
     };
+    console.log('comment: ', comment);
     this.props.create(this.props.id, comment);
+    this.setState({author: "", text: ""});
   }
 
   render() {
@@ -34,12 +36,11 @@ class CreateComment extends React.Component {
         <form onSubmit={(e) => {
             e.preventDefault();
             this.handleSubmit();
-            this.setState({author: "", text: ""});
           }} 
           className="createComment__form">
-          <textarea id="textarea" maxlength="1000" className="createComment__form_text-input" placeholder="Add a comment..." value={this.state.text} onChange={this.handleInput} required/>
+          <textarea id="textarea" maxLength={1000} className="createComment__form_text-input" placeholder="Add a comment..." value={this.state.text} onChange={this.handleInput} required/>
           <label className="createComment__form_label">Your name: &nbsp;</label>
-          <input type="text" maxlength="100" id="username" className="createComment__form_username-input" value={this.state.author} onChange={this.handleInput} required/>
+          <input type="text" maxLength={100} id="username" className="createComment__form_username-input" value={this.state.author} onChange={this.handleInput}/>
             <button className="std-btn" type="submit">Submit</button>
         </form>
       </div>

@@ -31,7 +31,7 @@ app.get('/articles/:id', function (req, res){
   pool.getConnection(function(error, connection) {
     connection.query(queryStr, [req.params.id], function(err, result) {
       if(err) res.status(500).send(err);
-      else article = result;
+      else article = result[0];
       let queryStr = `SELECT id, author, comment FROM comments WHERE article_id = (?)`;
       connection.query(queryStr, [req.params.id], function(err, result) {
         connection.release();

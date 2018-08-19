@@ -12,10 +12,10 @@ export const fetchArticle = (id) => {
   }
 };
 
-export const fetchArticleSuccess = (article) => {
+export const fetchArticleSuccess = (data) => {
   return {
     type: 'FETCH_ARTICLE_SUCCESS',
-    article
+    data
   }
 };
 
@@ -80,7 +80,8 @@ export const deleteArticle = (id) => {
   return(dispatch) => {
     axios.delete(`/articles/${id}`)
     .then(res => {
-      dispatch(deleteArticleSuccess(id))
+      dispatch(deleteArticleSuccess(id));
+      return res;
     })
     .catch(err => {
       console.log(err);
@@ -97,7 +98,7 @@ export const deleteArticleSuccess = (id) => {
 
 export const createComment = (id, comment) => {
   return(dispatch) => {
-    axios.post(`/articles/${id}/comment`)
+    axios.post(`/articles/${id}/comment`, comment)
     .then(res => {
       dispatch(createCommentSuccess(comment))
     })

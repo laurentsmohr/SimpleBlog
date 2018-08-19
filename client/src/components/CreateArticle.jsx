@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 class CreateArticle extends React.Component {
   constructor(props) {

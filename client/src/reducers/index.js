@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux';
-import { articles, current } from './articles';
+import { articles, currentArticle, currentComments } from './articles';
 
-export default combineReducers({ articles, current });
+export default combineReducers({ articles, currentArticle, currentComments });

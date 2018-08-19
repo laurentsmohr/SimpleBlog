@@ -1,5 +1,5 @@
 import React from 'react';
-import CreateArticle from '../components/CreateArticle';
+import CreateArticle from '../components/CreateArticle.jsx';
 import { connect } from 'react-redux';
 import { createArticle } from '../actions/index.js';
 

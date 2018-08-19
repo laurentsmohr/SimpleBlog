@@ -1,17 +1,22 @@
 import React from 'react';
-import EditArticle from '../components/EditArticle';
+import EditArticle from '../components/EditArticle.jsx';
 import { connect } from 'react-redux';
 import { editArticle } from '../actions/index.js';
 
+class EditContainer extends React.Component {
+  render() {
+    console.log('Edit Container props:', this.props);
+    if(!this.props.article) return null;
+    return <EditArticle article={this.props.article} editArticle={this.props.editArticle}/>
+  }
+}
 
 const mapStateToProps = (state) => ({
-  current: state.current
+  article: state.currentArticle
 });
 
 const mapDispatchToProps = (dispatch) => ({
   editArticle: (article) => dispatch(editArticle(article))
 });
 
-const EditContainer = connect(mapStateToProps, mapDispatchToProps)(EditArticle);
-
-export default EditContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(EditContainer);

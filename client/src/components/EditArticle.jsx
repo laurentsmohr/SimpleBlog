@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 class EditArticle extends React.Component {
   constructor(props) {
@@ -14,20 +13,31 @@ class EditArticle extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clear = this.clear.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.setFormInput = this.setFormInput.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount() {  
+    this.setFormInput();
+  }
+
+  componentDidUpdate(prevProps) { 
+    if(prevProps.article.id !== this.props.article.id) {
+      this.setFormInput();
+    }
+  }
+
+  setFormInput() {
     this.setState({
-      author: this.props.current.article[0].author,
-      title: this.props.current.article[0].title,
-      description: this.props.current.article[0].description,
-      text: this.props.current.article[0].text,
-      id: this.props.current.article[0].id
+      author: this.props.article.author,
+      title: this.props.article.title,
+      description: this.props.article.description,
+      text: this.props.article.text,
+      id: this.props.article.id
     })
   }
-  
 
   handleSubmit(e) {
+    e.preventDefault();
     let author = this.state.author || 'Anonymous';
     let description = this.state.description;
     if(this.state.description.substring(this.state.description.length - 3) !== '...') {
@@ -41,16 +51,13 @@ class EditArticle extends React.Component {
       id: this.state.id
     }
     this.props.editArticle(article);
+    let popup = document.getElementById('popup');
+    popup.style.visibility = 'hidden';
+    popup.style.opacity = 0;
   }
 
   clear(e) {
     e.preventDefault();
-    this.setState({
-      author: "",
-      title: "",
-      description: "",
-      text: ""
-    }) 
     let popup = document.getElementById('popup');
     popup.style.visibility = 'hidden';
     popup.style.opacity = 0;
