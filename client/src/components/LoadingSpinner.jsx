@@ -1,7 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 const LoadingSpinner = () => (
-  <div className="lds-rolling"><div></div></div>
+  <div className='lds-rolling'>
+    <div />
+  </div>
 )
-  
-export default LoadingSpinner;
+
+export default LoadingSpinner
