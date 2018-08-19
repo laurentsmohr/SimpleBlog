@@ -20,6 +20,9 @@ export const currentArticle = (state = null, action) => {
       case 'EDIT_ARTICLE':
         return action.article;
 
+      case 'RESET_CURRENT_ARTICLE':
+        return null;
+
       default: 
         return state;
     }
@@ -33,6 +36,9 @@ export const currentComments = (state = [], action) => {
     case 'CREATE_COMMENT':
       return [...state, action.comment];
 
+    case 'RESET_CURRENT_ARTICLE':
+      return [];
+
     default: 
       return state;
   }
@@ -44,7 +50,7 @@ export const articles = (state = [], action) => {
         return action.articles;
 
       case 'CREATE_ARTICLE':
-        return [action.article, ...state];
+        return [...state, action.article];
 
       case 'EDIT_ARTICLE':
         return state.map(article => {
@@ -62,7 +68,7 @@ export const articles = (state = [], action) => {
             index = i;
           }
         }
-        state.splice(i, 1);
+        state.splice(index, 1);
         return [...state];
 
       default:

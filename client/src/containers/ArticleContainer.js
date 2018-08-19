@@ -2,7 +2,7 @@ import React from 'react';
 import Article from '../components/Article.jsx';
 import LoadingSpinner from '../components/LoadingSpinner.jsx';
 import { connect } from 'react-redux';
-import { fetchArticle, deleteArticle } from '../actions/index.js';
+import { fetchArticle, deleteArticle, resetCurrentArticle } from '../actions/index.js';
 import { withRouter } from 'react-router-dom';
 
 
@@ -11,14 +11,14 @@ class ArticleContainer extends React.Component {
     this.props.fetchArticle(this.props.match.params.id); 
   }
 
+  componentWillUnmount() {
+    this.props.resetCurrentArticle();
+  }
+
   deleteArticle(id) {
-    this.props.deleteArticle(id)
-      .then(() => {
-        this.props.history.push('/');
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+    this.props.deleteArticle(id, () => {
+      this.props.history.push('/');
+    });
   }
 
   render () {
@@ -35,7 +35,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchArticle: (id) => dispatch(fetchArticle(id)),
-  deleteArticle: (id) => dispatch(deleteArticle(id))
+  deleteArticle: (id, cb) => dispatch(deleteArticle(id, cb)),
+  resetCurrentArticle: () => dispatch(resetCurrentArticle())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ArticleContainer));

@@ -77,12 +77,18 @@ app.put('/articles/:id', function (req, res){
 
 // DELETING AN ARTICLE
 app.delete('/articles/:id', function (req, res){
-  let queryStr = `DELETE FROM articles WHERE id=(?)`;
+  let queryStr = `DELETE FROM comments WHERE article_id=(?)`;
   pool.getConnection(function(error, connection) {
     connection.query(queryStr, [req.params.id], function(err, result) {
-      connection.release();
       if(err) res.status(500).send(err);
-      else res.status(200).send(result);
+      else {
+        let queryStr = `DELETE FROM articles WHERE id=(?)`;
+        connection.query(queryStr, [req.params.id], function(err, result) {
+          connection.release();
+          if(err) res.status(500).send(err);
+          else res.status(200).send(result);
+        });
+      }
     });
     if(error) console.log(error);
   });

@@ -14,7 +14,8 @@ class CreateArticle extends React.Component {
     this.handleInput = this.handleInput.bind(this);
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     let author = this.state.author || 'Anonymous';
     let description = this.state.description;
     if(this.state.description.substring(this.state.description.length - 3) !== '...') {
@@ -28,6 +29,9 @@ class CreateArticle extends React.Component {
     }
     article.date = (new Date()).toISOString().split("T")[0];
     this.props.createArticle(article);
+    let popup = document.getElementById('popup');
+    popup.style.visibility = 'hidden';
+    popup.style.opacity = 0;
   }
 
   clear(e) {
@@ -57,15 +61,15 @@ class CreateArticle extends React.Component {
           <form className="create-post-form" onSubmit={this.handleSubmit}>
             <p className="create-post-form__title">Create a new post</p>
             <label className="create-post-form__label">Title:</label>
-            <input type="text" className="create-post-form__input" id="title-input" maxlength="255" required value={this.state.title} onChange={(e) => this.handleInput(e)}/>
+            <input type="text" className="create-post-form__input" id="title-input" maxLength={255} required value={this.state.title} onChange={(e) => this.handleInput(e)}/>
             <label className="create-post-form__label" >Author:</label>
-            <input type="text" className="create-post-form__input"id="author-input" maxlength="30" value={this.state.author} onChange={(e) => this.handleInput(e)}/>
+            <input type="text" className="create-post-form__input"id="author-input" maxLength={30} value={this.state.author} onChange={(e) => this.handleInput(e)}/>
             <label className="create-post-form__label" >Description:</label>
-            <input type="text" className="create-post-form__input" id="description-input" maxlength="252" value={this.state.description} onChange={(e) => this.handleInput(e)}/>
+            <input type="text" className="create-post-form__input" id="description-input" maxLength={252} value={this.state.description} onChange={(e) => this.handleInput(e)}/>
             <label className="create-post-form__label">Article:</label>
-            <textarea type="text" className="create-post-form__textarea" id="text-input" maxlength="65000" value={this.state.text} onChange={(e) => this.handleInput(e)} required></textarea>
+            <textarea type="text" className="create-post-form__textarea" id="text-input" maxLength={65000} value={this.state.text} onChange={(e) => this.handleInput(e)} required></textarea>
             <button className="std-btn" type="submit">Submit</button>
-            <button className="std-btn btn-cancel" onClick={this.clear} formnovalidate>Cancel</button>
+            <button className="std-btn btn-cancel" onClick={this.clear} formNoValidate>Cancel</button>
           </form>
         </div>
       </div>

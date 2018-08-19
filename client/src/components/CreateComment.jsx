@@ -25,7 +25,6 @@ class CreateComment extends React.Component {
       comment: this.state.text,
       article_id: this.props.id
     };
-    console.log('comment: ', comment);
     this.props.create(this.props.id, comment);
     this.setState({author: "", text: ""});
   }

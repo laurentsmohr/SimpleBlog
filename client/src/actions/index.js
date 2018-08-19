@@ -19,6 +19,12 @@ export const fetchArticleSuccess = (data) => {
   }
 };
 
+export const resetCurrentArticle = () => {
+  return {
+    type: 'RESET_CURRENT_ARTICLE'
+  }
+};
+
 export const fetchAllArticles = () => {
   return (dispatch) => {
     axios.get('/articles')
@@ -42,7 +48,12 @@ export const createArticle = (article) => {
   return(dispatch) => {
     axios.post('/articles', article)
     .then(res => {
-      dispatch(createArticleSuccess(article))
+      let metaInfo = {
+        id: res.data.insertId,
+        title: article.title,
+        description: article.description
+      }
+      dispatch(createArticleSuccess(metaInfo))
     })
     .catch(err => {
       console.log(err);
@@ -76,12 +87,12 @@ export const editArticleSuccess = (article) => {
   }
 };
 
-export const deleteArticle = (id) => {
+export const deleteArticle = (id, cb) => {
   return(dispatch) => {
     axios.delete(`/articles/${id}`)
     .then(res => {
       dispatch(deleteArticleSuccess(id));
-      return res;
+      cb();
     })
     .catch(err => {
       console.log(err);
