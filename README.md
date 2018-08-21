@@ -14,4 +14,5 @@ What could/should be added with more time?
 - Feature: Read only for unauthenticated users
 - Reponsive Styles
 - Frontend-Optimization: Browser Caching, uglify, etc.
+
 Anything else? - Let me know!
