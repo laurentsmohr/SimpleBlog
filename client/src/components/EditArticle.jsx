@@ -61,7 +61,7 @@ class EditArticle extends React.Component {
     this.clear()
   }
 
-  clear() {
+  clear () {
     let popup = document.getElementById('popup')
     popup.style.visibility = 'hidden'
     popup.style.opacity = 0

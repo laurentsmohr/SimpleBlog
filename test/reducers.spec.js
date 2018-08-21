@@ -1,22 +1,22 @@
-import { expect } from 'chai' 
+import { expect } from 'chai'
 import { currentArticle, currentComments, articles } from '../client/src/reducers/articles.js'
 
-describe('reducers',  () => {
+describe('reducers', () => {
   const fakeAction = {
-    type: 'FETCH_ARTICLE_SUCCESS', 
+    type: 'FETCH_ARTICLE_SUCCESS',
     data: {
       article: {
         script: 'this is my only line.'
-      }, 
+      },
       comments: ['a', 'b', 'c']
     }
   }
   const fakeAction2 = {
-      type: 'EDIT_ARTICLE', 
-      article: {
-        script: 'this is my only line.'
-      }
-  } 
+    type: 'EDIT_ARTICLE',
+    article: {
+      script: 'this is my only line.'
+    }
+  }
   const fakeState = {
     articles: ['x', 'y', 'z'],
     currentArticle: {
@@ -47,7 +47,7 @@ describe('reducers',  () => {
       expect(currentArticle.bind(this, Object.freeze(fakeState), fakeAction)).to.not.throw()
     })
   })
-  
+
   describe('currentComments reducer should return correct state', () => {
     const createCommentAction = {
       type: 'CREATE_COMMENT',
@@ -79,7 +79,7 @@ describe('reducers',  () => {
   describe('articles reducer should return correct state', () => {
     const fakeActions = {
       fetch: {
-        type: 'FETCH_ALL_ARTICLES_SUCCESS', 
+        type: 'FETCH_ALL_ARTICLES_SUCCESS',
         articles: [1, 2, 3]
       },
       create: {
