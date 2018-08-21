@@ -12,5 +12,6 @@ What could/should be added with more time?
 - Feature: Allow authors to save drafts
 - Feature: Enable styling of posts and inserting of images/videos
 - Feature: Read only for unauthenticated users
+- Reponsive Styles
 - Frontend-Optimization: Browser Caching, uglify, etc.
 Anything else? - Let me know!
