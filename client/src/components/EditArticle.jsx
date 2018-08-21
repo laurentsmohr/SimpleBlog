@@ -11,6 +11,7 @@ class EditArticle extends React.Component {
       id: null
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.cancel = this.cancel.bind(this)
     this.clear = this.clear.bind(this)
     this.handleInput = this.handleInput.bind(this)
     this.setFormInput = this.setFormInput.bind(this)
@@ -52,13 +53,15 @@ class EditArticle extends React.Component {
       id: this.state.id
     }
     this.props.editArticle(article)
-    let popup = document.getElementById('popup')
-    popup.style.visibility = 'hidden'
-    popup.style.opacity = 0
+    this.clear()
   }
 
-  clear (e) {
+  cancel (e) {
     e.preventDefault()
+    this.clear()
+  }
+
+  clear() {
     let popup = document.getElementById('popup')
     popup.style.visibility = 'hidden'
     popup.style.opacity = 0
@@ -80,13 +83,13 @@ class EditArticle extends React.Component {
             <label className='create-post-form__label'>Title:</label>
             <input type='text' className='create-post-form__input' id='title-input' maxLength={255} required value={this.state.title} onChange={(e) => this.handleInput(e)} />
             <label className='create-post-form__label' >Author:</label>
-            <input type='text' className='create-post-form__input'id='author-input' maxLength={30} value={this.state.author} onChange={(e) => this.handleInput(e)} />
+            <input type='text' className='create-post-form__input' id='author-input' maxLength={30} value={this.state.author} onChange={(e) => this.handleInput(e)} />
             <label className='create-post-form__label' >Description:</label>
             <input type='text' className='create-post-form__input' id='description-input' maxLength={252} value={this.state.description} onChange={(e) => this.handleInput(e)} />
             <label className='create-post-form__label'>Article:</label>
             <textarea type='text' className='create-post-form__textarea' id='text-input' maxLength={65000} value={this.state.text} onChange={(e) => this.handleInput(e)} required />
             <button className='std-btn' type='submit'>Submit</button>
-            <button className='std-btn btn-cancel' onClick={this.clear} formNoValidate>Cancel</button>
+            <button className='std-btn btn-cancel' onClick={this.cancel} formNoValidate>Cancel</button>
           </form>
         </div>
       </div>

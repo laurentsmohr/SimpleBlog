@@ -18,11 +18,11 @@ class ArticleListContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
   articles: state.articles
 })
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   fetchArticle: (id) => dispatch(fetchArticle(id))
 })
 

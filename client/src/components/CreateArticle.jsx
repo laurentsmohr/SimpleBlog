@@ -10,6 +10,7 @@ class CreateArticle extends React.Component {
       text: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.cancel = this.cancel.bind(this)
     this.clear = this.clear.bind(this)
     this.handleInput = this.handleInput.bind(this)
   }
@@ -29,13 +30,15 @@ class CreateArticle extends React.Component {
     }
     article.date = (new Date()).toISOString().split('T')[0]
     this.props.createArticle(article)
-    let popup = document.getElementById('popup')
-    popup.style.visibility = 'hidden'
-    popup.style.opacity = 0
+    this.clear()
   }
 
-  clear (e) {
+  cancel (e) {
     e.preventDefault()
+    this.clear()
+  }
+
+  clear () {
     this.setState({
       author: '',
       title: '',
@@ -69,7 +72,7 @@ class CreateArticle extends React.Component {
             <label className='create-post-form__label'>Article:</label>
             <textarea type='text' className='create-post-form__textarea' id='text-input' maxLength={65000} value={this.state.text} onChange={(e) => this.handleInput(e)} required />
             <button className='std-btn' type='submit'>Submit</button>
-            <button className='std-btn btn-cancel' onClick={this.clear} formNoValidate>Cancel</button>
+            <button className='std-btn btn-cancel' onClick={this.cancel} formNoValidate>Cancel</button>
           </form>
         </div>
       </div>
